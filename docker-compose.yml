@@ -1,0 +1,103 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Intelligent Medical Drone Delivery System
+# Bengaluru 4-Zone + Central Hub Architecture
+# Stack: PostgreSQL + Redis + FastAPI AI + Spring Boot + React
+# ──────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── MySQL Database 8.0 (System of Record) ──────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: medical_drone_mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in the project .env file}
+      MYSQL_DATABASE: ${DB_NAME:-medical_drone_db}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/init-mysql.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$${MYSQL_ROOT_PASSWORD} --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis (Cache & Distributed Lock State) ──────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: medical_drone_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Python FastAPI AI Microservice (Multi-Agent Decision Pipeline) ──────────
+  ai-service:
+    build:
+      context: .
+      dockerfile: ai-service/Dockerfile
+    container_name: medical_drone_ai_service
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MODEL_PATH=/app/ai-service/models
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - WEATHER_API_BASE_URL=${WEATHER_API_BASE_URL:-https://api.open-meteo.com/v1/forecast}
+      - WEATHER_API_TIMEOUT_SECONDS=${WEATHER_API_TIMEOUT_SECONDS:-5}
+    volumes:
+      - ./ai-service:/app/ai-service
+      - ./ai-service/models:/app/ai-service/models
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/internal/ai/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # ── Spring Boot 3 Core Backend (Business Logic & Transactions) ──────────────
+  backend-spring:
+    build:
+      context: ./backend-spring
+      dockerfile: Dockerfile
+    container_name: medical_drone_backend_spring
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ai-service:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://${DOCKER_DB_HOST:-mysql}:${DB_PORT:-3306}/${DB_NAME:-medical_drone_db}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in the project .env file}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in the project .env file}
+      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:-rzp_test_placeholder}
+      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:-placeholder_secret}
+      RAZORPAY_WEBHOOK_SECRET: ${RAZORPAY_WEBHOOK_SECRET:-}
+      REDIS_HOST: ${DOCKER_REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+      AI_SERVICE_URL: ${DOCKER_AI_SERVICE_URL:-http://ai-service:8000}
+      AI_SERVICE_WORKFLOW_TIMEOUT_SECONDS: ${AI_SERVICE_WORKFLOW_TIMEOUT_SECONDS:-30}
+      GEOCODING_PROVIDER_URL: ${GEOCODING_PROVIDER_URL:-https://nominatim.openstreetmap.org/search}
+      GEOCODING_USER_AGENT: "${GEOCODING_USER_AGENT:-MedicalDroneManagement/1.0 (contact: configure-GEOCODING_USER_AGENT)}"
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local

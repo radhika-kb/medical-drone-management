@@ -1,0 +1,57 @@
+# .gitignore for Medical Drone Management Platform
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+menv/
+dist/
+build/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.pyo
+
+# ── Environment / secrets ─────────────────────────────────────────────────────
+.env
+*.env.local
+*.env.*.local
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ── ML models (large binary files — store with Git LFS or separate registry)
+models/*.pkl
+models/*.pt
+models/*.onnx
+models/*.h5
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── macOS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── IDEs ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+# Keep docker-compose.yml but ignore override files with local passwords
+docker-compose.override.yml
+
+
+# Java/Maven build output
+backend-spring/target/

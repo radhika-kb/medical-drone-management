@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "purpose": "Controlled allowlist for healthcare institution names/addresses shown in the Bengaluru logistics software simulation.",
+    "relationshipNotice": "Directory records do not establish a customer, partner, user, supply, integration, authorization, or endorsement relationship. Requests, inventory, transport and all logistics actions are part of a software simulation.",
+    "coordinatePolicy": "Coordinates are intentionally null until backend geocoding and administrator map-pin confirmation. Do not substitute map-center or guessed coordinates.",
+    "verifiedOn": "2026-10-06"
+  },
+  "institutions": [
+    { "id": 1, "name": "Aster CMI Hospital", "type": "HOSPITAL", "address": "No. 43/2, New Airport Road, NH 44, Sahakar Nagar, Hebbal, Bengaluru - 560092", "latitude": null, "longitude": null, "source": "https://www.asterhospitals.in/hospitals/aster-cmi-bangalore" },
+    { "id": 2, "name": "Bangalore Baptist Hospital", "type": "HOSPITAL", "address": "Bellary Road, Hebbal, Bengaluru - 560024", "latitude": null, "longitude": null, "source": "https://bbh.org.in/contact/" },
+    { "id": 3, "name": "Ramaiah Medical College Hospital", "type": "HOSPITAL", "address": "MSR Nagar, MSRIT Post, Bengaluru - 560054", "latitude": null, "longitude": null, "source": "https://www.msrmc.ac.in/hospital/contact-us" },
+    { "id": 4, "name": "Manipal Hospital Hebbal", "type": "HOSPITAL", "address": "Kirloskar Business Park, Bellary Road, Hebbal, Bengaluru", "latitude": null, "longitude": null, "source": "https://www.manipalhospitals.com/hebbal/about-us/" },
+    { "id": 5, "name": "Cytecare Cancer Hospital", "type": "HOSPITAL", "address": "Venkatala, near Bagalur Cross, Yelahanka, Bengaluru - 560064", "latitude": null, "longitude": null, "source": "https://cytecare.com/wp-content/uploads/2021/01/Advanced-Cancer-Care_brochure.pdf" },
+    { "id": 6, "name": "Manipal Hospital Whitefield", "type": "HOSPITAL", "address": "ITPL Main Road, opposite Prestige Shantiniketan, Whitefield, Bengaluru - 560066", "latitude": null, "longitude": null, "source": "https://www.manipalhospitals.com/whitefield/contact-us/" },
+    { "id": 7, "name": "Vydehi Institute of Medical Sciences", "type": "HOSPITAL", "address": "82, Nallurahalli, near BMTC 18th Depot, Whitefield, Bengaluru - 560066", "latitude": null, "longitude": null, "source": "https://vims.ac.in/education/contact-us/" },
+    { "id": 8, "name": "Manipal Hospital Varthur Road", "type": "HOSPITAL", "address": "Survey No. 10P & 12P, Ramagondanahalli, Varthur Kodi, Whitefield, Bengaluru - 560066", "latitude": null, "longitude": null, "source": "https://www.manipalhospitals.com/varthurroad/contact-us/" },
+    { "id": 9, "name": "Sakra World Hospital", "type": "HOSPITAL", "address": "SY No. 52/2 & 52/3, Devarabeesanahalli, Varthur Hobli, Outer Ring Road, Bengaluru - 560103", "latitude": null, "longitude": null, "source": "https://www.sakraworldhospital.com/contact-us" },
+    { "id": 10, "name": "Cloudnine Hospital Whitefield", "type": "HOSPITAL", "address": "Nagarjuna Sai Signet, 2nd floor, 11 Whitefield Main Road, Krishnarajapura, Bengaluru - 560066", "latitude": null, "longitude": null, "source": "https://www.cloudninecare.com/centre/whitefield" },
+    { "id": 11, "name": "Mazumdar Shaw Medical Centre (Narayana Health)", "type": "HOSPITAL", "address": "258/A, Bommasandra Industrial Area, Hosur Road, Anekal Taluk, Bengaluru - 560099", "latitude": null, "longitude": null, "source": "https://www.narayanahealth.org/hospitals-clinics/bangalore/mazumdar-shaw-medical-centre-bommasandra" },
+    { "id": 12, "name": "Fortis Hospital, Bannerghatta Road", "type": "HOSPITAL", "address": "154/9, Bannerghatta Road, opposite IIM-B, Bengaluru - 560076", "latitude": null, "longitude": null, "source": "https://www.fortishealthcare.com/lp/leadinggeneralphysiciancampaignbangalorebg" },
+    { "id": 13, "name": "Apollo Hospitals, Bannerghatta Road", "type": "HOSPITAL", "address": "154/11, IIM, opposite Krishnaraju Layout, Panduranga Nagar, Bengaluru - 560076", "latitude": null, "longitude": null, "source": "https://www.apollohospitals.com/hospitals/apollo-hospitals-bannerghatta-road" },
+    { "id": 14, "name": "Sri Jayadeva Institute of Cardiovascular Sciences and Research", "type": "HOSPITAL", "address": "Jayanagar 9th Block, Bannerghatta Road, Bengaluru - 560069", "latitude": null, "longitude": null, "source": "https://jayadevacardiology.com/contact_us.html" },
+    { "id": 15, "name": "St. John's Medical College Hospital", "type": "HOSPITAL", "address": "Sarjapur Road, Koramangala, Bengaluru - 560034", "latitude": null, "longitude": null, "source": "https://www.stjohns.in/hospital/index.php" },
+    { "id": 16, "name": "Victoria Hospital", "type": "HOSPITAL", "address": "Near City Market, Fort Road, Bengaluru - 560002", "latitude": null, "longitude": null, "source": "https://bengaluruurban.nic.in/en/public-utility/victoria-hospital/" },
+    { "id": 17, "name": "Bowring Hospital", "type": "HOSPITAL", "address": "Lady Curzon Road, Shivaji Nagar, Tasker Town, Bengaluru - 560001", "latitude": null, "longitude": null, "source": "https://bengaluruurban.nic.in/en/public-utility/bowringhospital/" },
+    { "id": 18, "name": "K.C. General Hospital", "type": "HOSPITAL", "address": "#89, 5th Cross Road, behind Police Station, Malleshwaram, Bengaluru - 560003", "latitude": null, "longitude": null, "source": "https://bengaluruurban.nic.in/en/public-utility/k-c-general-hospital/" },
+    { "id": 21, "name": "Rotary Bangalore-TTK Blood Centre (BMST)", "type": "BLOOD_BANK", "address": "New Thippasandra Main Road, HAL 3rd Stage, Bengaluru - 560075", "latitude": null, "longitude": null, "source": "https://www.bmstindia.org/rotary-ttk-blood-bank" }
+  ]
+}

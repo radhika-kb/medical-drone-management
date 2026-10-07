@@ -1,0 +1,60 @@
+# .dockerignore for Medical Drone Management Platform
+
+# ── Git ───────────────────────────────────────────────────────────────────────
+.git
+.gitignore
+
+# ── Environment / secrets ─────────────────────────────────────────────────────
+.env
+*.env.local
+*.env.*.local
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+**/venv/
+**/.venv/
+env/
+menv/
+dist/
+build/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log
+yarn-error.log
+frontend/dist/
+frontend/.vite/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── IDEs ──────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Data / Models ─────────────────────────────────────────────────────────────
+data/
+models/*.pkl
+models/*.pt
+models/*.onnx
+models/*.h5
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+docker-compose.override.yml

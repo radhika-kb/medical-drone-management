@@ -1,0 +1,44 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# AI-Powered Medical Drone Delivery Management & Simulation Platform
+# Single project-wide requirements file.
+#
+# Activate your virtual environment first, then run:
+#   pip install -r requirements.txt
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── Web framework ──────────────────────────────────────────────────────────────
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# ── MongoDB async driver ───────────────────────────────────────────────────────
+# motor resolves a compatible pymongo version automatically — do NOT pin pymongo.
+motor>=3.5.0
+
+# ── Settings / validation ──────────────────────────────────────────────────────
+pydantic>=2.7.0
+pydantic-settings>=2.4.0
+python-dotenv>=1.0.0
+
+# ── Auth (Phase 2) ─────────────────────────────────────────────────────────────
+bcrypt>=4.0.0               # password hashing — passlib is unmaintained; use bcrypt directly
+PyJWT>=2.8.0                # JWT issue & verify (pure Python, works on 3.14+)
+email-validator>=2.0.0      # required by pydantic EmailStr
+
+# ── Utilities ──────────────────────────────────────────────────────────────────
+python-multipart>=0.0.9     # required by FastAPI for form data (future phases)
+
+# ML inference artifacts under ai-service/models
+scikit-learn==1.8.0          # matches the version used to serialize the shipped models
+xgboost>=2.0.0               # required to deserialize the XGBoost pipeline estimators
+joblib>=1.4.0
+pandas>=2.2.0
+numpy>=1.26.0
+
+# ── Testing ────────────────────────────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.24.0
+
+# ── Phase 10: LangGraph orchestration + Groq LLM explanation ─────────────────
+langgraph>=0.2.0
+langchain-groq>=0.1.0
+langchain-core>=0.2.0

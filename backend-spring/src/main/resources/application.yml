@@ -1,0 +1,58 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import: optional:file:../.env[.properties]
+  application:
+    name: medical-drone-management
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:mysql}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000ms
+  cache:
+    type: ${SPRING_CACHE_TYPE:none}
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:medical_drone_db}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata&characterEncoding=UTF-8}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:root}}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+
+app:
+  geocoding:
+    provider-url: ${GEOCODING_PROVIDER_URL:https://nominatim.openstreetmap.org/search}
+    user-agent: "${GEOCODING_USER_AGENT:MedicalDroneManagement/1.0 (contact: configure-GEOCODING_USER_AGENT)}"
+  jwt:
+    secret: ${JWT_SECRET:local-development-only-change-this-secret-before-deploying-1234567890}
+    expiration-ms: 86400000 # 24 hours
+    refresh-expiration-ms: 604800000 # 7 days
+
+ai:
+  service:
+    url: ${AI_SERVICE_URL:http://localhost:8000}
+    workflow-timeout-seconds: ${AI_SERVICE_WORKFLOW_TIMEOUT_SECONDS:30}
+
+demand:
+  forecast:
+    cron: ${DEMAND_FORECAST_CRON:0 0 */6 * * *}
+
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID:rzp_test_placeholder}
+  key-secret: ${RAZORPAY_KEY_SECRET:placeholder_secret}
+  webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+  currency: ${RAZORPAY_CURRENCY:INR}
+  company-name: "Bengaluru Medical Drone Network"
+
+logging:
+  level:
+    com.medicaldrone: INFO
+    org.springframework.security: WARN
